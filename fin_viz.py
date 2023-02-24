@@ -4,7 +4,19 @@ import pandas as pd
 import matplotlib as mpl
 import matplotlib.ticker as ticker
 import matplotlib.pyplot as plt
-from mpl_finance import candlestick2_ohlc
+import mplfinance as mpf
 
-def candlechart(fig, ax, df):
-    candlestick2_ohlc(ax, df['Open'], df['High'], df['Low'], df['Close'], colorup='r', colordown='b')
+def candlechart(df, volume=False):
+    mc = mpf.make_marketcolors(
+    up='r',
+    down='b',
+    )
+    mco = [mc] * len(df)
+
+    return mpf.plot(
+        df[['Open', 'High', 'Low', 'Close', 'Volume']], 
+        style='yahoo', 
+        type='candle', 
+        marketcolor_overrides=mco, volume=volume,
+        returnfig=True
+    )

@@ -21,7 +21,7 @@ def load_df(filepath_or_buffer=None):
         option = yaml.load('data-load.yaml')
         df = pd.read_csv(option2filename(option))
     else:
-        df = pd.read_csv(filepath_or_buffer).set_index('Date')
+        df = pd.read_csv(filepath_or_buffer, parse_dates=['Date']).set_index('Date')
 
     return df
 
