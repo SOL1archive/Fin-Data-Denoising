@@ -1,0 +1,4 @@
+ticker: "^GSPC"
+start: "1990-02-24"
+end: "2023-02-24"
+interval: "1d"
