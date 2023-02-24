@@ -3,7 +3,7 @@ import pandas as pd
 import yfinance as yf
 
 def option2filename(option):
-    return option['ticker'] + option['start'] + option['end'] + option['interval'] + '.csv'
+    return 'data/' + option['ticker'] + option['start'] + '~' + option['end'] + option['interval'] + '.csv'
 
 def download(option=None):
     if option is None:
