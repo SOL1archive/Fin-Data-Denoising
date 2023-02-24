@@ -6,7 +6,7 @@ import matplotlib.ticker as ticker
 import matplotlib.pyplot as plt
 import mplfinance as mpf
 
-def candlechart(df, volume=False):
+def candlechart(df, volume=False, **kwargs):
     mc = mpf.make_marketcolors(
     up='r',
     down='b',
@@ -17,6 +17,8 @@ def candlechart(df, volume=False):
         df[['Open', 'High', 'Low', 'Close', 'Volume']], 
         style='yahoo', 
         type='candle', 
-        marketcolor_overrides=mco, volume=volume,
-        returnfig=True
+        marketcolor_overrides=mco, 
+        volume=volume,
+        returnfig=True,
+        **kwargs
     )
