@@ -1,0 +1,3 @@
+## AutoEncoder
+### CNN
+- Add paddings
