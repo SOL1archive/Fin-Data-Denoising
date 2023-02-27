@@ -19,13 +19,14 @@ class CnnEncoder(nn.Module):
         super(CnnEncoder, self).__init__()
 
         self.encoder_cnn = nn.Sequential(
-            nn.Conv1d(1, 8, conv1_kernel, stride=1, padding=conv1_kernel // 2),
+            nn.Conv1d(1, 8, conv1_kernel, stride=1, padding=conv1_kernel),
             nn.ReLU(inplace=True),
-            nn.Conv1d(8, 16, conv2_kernel, stride=1, padding=conv2_kernel // 2),
-            #nn.BatchNorm1d(16),
+            nn.Conv1d(8, 16, conv2_kernel, stride=1, padding=conv2_kernel),
             nn.ReLU(inplace=True),
-            nn.Conv1d(16, 32, conv3_kernel, stride=1, padding=conv3_kernel // 2),
-            nn.ReLU(inplace=True)
+            nn.Conv1d(16, 32, conv3_kernel, stride=1, padding=conv3_kernel),
+            nn.ReLU(inplace=True),
+            nn.Conv1d(32, 64, conv3_kernel, stride=1, padding=conv3_kernel),
+            nn.ReLU(inplace=True),
         )
 
     def forward(self, x):
@@ -42,11 +43,13 @@ class CnnDecoder(nn.Module):
         super(CnnDecoder, self).__init__()
 
         self.decoder_cnn = nn.Sequential(
-            nn.ConvTranspose1d(32, 16, conv3_kernel, stride=1, padding=conv3_kernel // 2),
+            nn.ConvTranspose1d(64, 32, conv3_kernel, stride=1, padding=conv3_kernel),
             nn.ReLU(inplace=True),
-            nn.ConvTranspose1d(16, 8, conv2_kernel, stride=1, padding=conv2_kernel // 2),
+            nn.ConvTranspose1d(32, 16, conv3_kernel, stride=1, padding=conv3_kernel),
             nn.ReLU(inplace=True),
-            nn.ConvTranspose1d(8, 1, conv1_kernel, stride=1, padding=conv1_kernel // 2)
+            nn.ConvTranspose1d(16, 8, conv2_kernel, stride=1, padding=conv2_kernel),
+            nn.ReLU(inplace=True),
+            nn.ConvTranspose1d(8, 1, conv1_kernel, stride=1, padding=conv1_kernel),
         )
 
     def forward(self, x):
