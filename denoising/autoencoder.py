@@ -62,6 +62,4 @@ class LstmEncoder(nn.Module):
     def __init__(self, encoded_space_dim) -> None:
         super(LstmEncoder).__init__()
 
-        self.encoder_lstm = nn.Sequential(
-            nn.LSTM(),
-        )
+        self.encoder_lstm = nn.LSTM(input_dim=1, )
