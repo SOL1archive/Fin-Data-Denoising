@@ -1,7 +1,7 @@
 # Fin-Data-Denoising
 Finance data denoising with MA, EMA, bilateral filter, AE(CNN Stacked, LSTM Stacked)
 
-This project is focusing on denosing financial time series data and finding out which denoising method has good performanc. The main idea is from [this blog post](https://www.qraftec.com/insights-korean/2019/3/6/deep-time-series-denosier). Implementing the result of the post is the goal of this project.
+This project is focusing on denosing financial time series data and finding out which denoising method has good performance. The main idea is from [this blog post](https://www.qraftec.com/insights-korean/2019/3/6/deep-time-series-denosier). Implementing the result of the post is the goal of this project.
 
 Mid-Result
 - [AutoEncoder Test](./autoencoder-test.ipynb)
