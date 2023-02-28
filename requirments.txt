@@ -5,3 +5,5 @@ matplotlib==3.6.2
 mplfinance==0.12.9b7
 torch==1.13.0
 skorch==0.12.1
+scikit-image==0.19.3
+scikit-learn==1.1.3
