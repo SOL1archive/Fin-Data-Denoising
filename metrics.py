@@ -2,7 +2,7 @@ import numpy as np
 from sklearn.metrics import mean_squared_error
 from skimage.metrics import structural_similarity as ssim
 
-def snr_time_series(y_true, y_pred):
+def snr(y_true, y_pred):
     mse = np.mean((y_true - y_pred)**2)
     signal_power = np.mean(y_true**2)
 
@@ -16,9 +16,9 @@ def psnr(y_true, y_pred):
         return float('inf')
     return 20 * np.log10(max_channel / np.sqrt(mse))
 
-def ssim_time_series(y_true, y_pred, window_size):
+def ssim(y_true, y_pred, window_size=20):
     scores = []
     for i in range(len(y_true) - window_size):
-        score, _ = ssim(y_true[i:i + window_size], y_pred[i:i + window_size], full=True)
+        score = ssim(y_true[i:i + window_size], y_pred[i:i + window_size])
         scores.append(score)
     return np.mean(scores)

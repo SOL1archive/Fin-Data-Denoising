@@ -1,12 +1,6 @@
 import torch
 import torch.nn as nn
 
-# Hyperparameters
-## CNN
-
-## LSTM
-
-
 # CNN
 
 class CnnEncoder(nn.Module):
