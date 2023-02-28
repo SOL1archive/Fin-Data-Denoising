@@ -9,5 +9,7 @@ Mid-Result
 
 The Project is ongoing.
 
+Traditional filters([tsfilt](./tsfilt/)) is from [this repository](https://github.com/statefb/ts-spatial-filter).
+
 - I am going to implement both CNN, LSTM stacked autoencoder to check whether the performance of CNN stacked autoencoder is better than LSTM stacked autoencoder.
 - The reason why I chosed bilateral filter instead of Gaussian filter is because complex financial data noise is not expected to form a Gaussian distribution.
