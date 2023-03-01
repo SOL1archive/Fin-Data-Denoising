@@ -1,10 +1,6 @@
-import math
-
 import numpy as np
-import torch
-import torch.functional as F
-from sklearn.metrics import mean_squared_error
-
+import pandas as pd
+from sklearn.metrics import mean_squared_error, r2_score
 
 def snr(y_true, y_pred):
     mse = np.mean((y_true - y_pred)**2)
@@ -20,32 +16,38 @@ def psnr(y_true, y_pred):
         return float('inf')
     return 20 * np.log10(max_channel / np.sqrt(mse))
 
-# The code below is from https://gaussian37.github.io/vision-concept-ssim/
+def get_metrics(df_dict, index_column=None, metrics_dict=None):
+    if metrics_dict is None:
+        metrics_dict = {
+            'mean_squared_error': mean_squared_error,
+            'R-squared': r2_score,
+            'snr': snr,
+            'psnr': psnr
+        }
 
-def gaussian(window_size, sigma):
-    """
-    Generates a list of Tensor values drawn from a gaussian distribution with standard
-    diviation = sigma and sum of all elements = 1.
-
-    Length of list = window_size
-    """    
-    gauss =  torch.Tensor([math.exp(-(x - window_size//2)**2/float(2*sigma**2)) for x in range(window_size)])
-    return gauss/gauss.sum()
-
-def create_window(window_size, channel=1):
-
-    # Generate an 1D tensor containing values sampled from a gaussian distribution
-    # _1d_window : (window_size, 1)
-    # sum of _1d_window = 1
-    _1d_window = gaussian(window_size=window_size, sigma=1.5).unsqueeze(1)
+    result_dict = dict()
+    if index_column is None:
+        result_dict['Filter'] = []
+    else:
+        result_dict[index_column] = []
     
-    # Converting to 2D  : _1d_window (window_size, 1) @ _1d_window.T (1, window_size)
-    # _2d_window : (window_size, window_size)
-    # sum of _2d_window = 1
-    _2d_window = _1d_window.mm(_1d_window.t()).float().unsqueeze(0).unsqueeze(0)
-     
-    # expand _2d_window to window size
-    # window : (channel, 1, window_size, window_size)
-    window = torch.Tensor(_2d_window.expand(channel, 1, window_size, window_size).contiguous())
+    for metric_name in metrics_dict:
+        result_dict[metric_name] = []
+    
+    for filt_df_name in df_dict:
+        result_dict[index_column].append(filt_df_name)
 
-    return window
+        filt_df = df_dict[filt_df_name]
+        y_true = filt_df['True']
+        y_pred = filt_df.drop('True', axis=1).iloc[:, 0]        
+        for metric_name in metrics_dict:
+            metric_func = metrics_dict[metric_name]
+            result_dict[metric_name].append(
+                metric_func(y_true, y_pred)
+            )
+    
+    result_df = pd.DataFrame(result_dict).set_index(
+        'Filter' if index_column is None else index_column
+    )
+    
+    return result_df
