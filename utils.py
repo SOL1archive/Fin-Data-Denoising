@@ -32,4 +32,8 @@ def get_metrics(df_dict, index_column=None, metrics_dict=None):
                 metric_func(y_true, y_pred)
             )
     
-    return pd.DataFrame(result_dict)
+    result_df = pd.DataFrame(result_dict).set_index(
+        'Filter' if index_column is None else index_column
+    )
+    
+    return result_df
