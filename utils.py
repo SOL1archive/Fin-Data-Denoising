@@ -4,7 +4,7 @@ from metrics import snr, psnr
 
 def get_metrics(df_dict, index_column=None, metrics_dict=None):
     if metrics_dict is None:
-        metrics_dict = metrics_dict = {
+        metrics_dict = {
             'mean_squared_error': mean_squared_error,
             'R-squared': r2_score,
             'snr': snr,
