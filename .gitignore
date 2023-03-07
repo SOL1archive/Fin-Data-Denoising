@@ -131,3 +131,5 @@ dmypy.json
 # Custm
 model-dir/
 data/
+plots/*.png
+plots/*.jpeg
