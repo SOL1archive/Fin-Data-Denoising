@@ -57,11 +57,29 @@ class CnnDecoder(nn.Module):
         return x
 
 #################################################################################################
-# LSTM
+# LSTM: Seq2Seq
 #################################################################################################
 
 class LstmEncoder(nn.Module):
     def __init__(self, encoded_space_dim) -> None:
-        super(LstmEncoder).__init__()
+        super(LstmEncoder, self).__init__()
 
-        self.encoder_lstm = nn.LSTM(input_dim=1, )
+        self.encoder_lstm = nn.LSTM(
+            input_size=1, hidden_size=encoded_space_dim, num_layers=5, dropout=.2, bidirectional=True
+        )
+
+    def forward(self, x):
+        x = self.encoder_lstm(x)
+        return x
+    
+class LstmDecoder(nn.Module):
+    def __init__(self, encoded_space_dim) -> None:
+        super(LstmDecoder, self).__init__()
+
+        self.decoder_lstm = nn.LSTM(
+            input_size=1, hidden_size=encoded_space_dim, num_layers=5, dropout=.2, bidirectional=True
+        )
+
+    def forward(self, x):
+        x = self.decoder_lstm(x)
+        return x
