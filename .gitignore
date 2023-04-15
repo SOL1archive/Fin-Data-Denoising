@@ -128,8 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Custm
+# Custom
 model-dir/
 data/
 plots/*.png
 plots/*.jpeg
+.idea/
