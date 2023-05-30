@@ -1,16 +1,17 @@
 # Fin-Data-Denoising
-Finance data denoising with MA, EMA, bilateral filter, AE(CNN Stacked, LSTM Stacked)
+> Finance data denoising with MA, EMA, bilateral filter, Convolutional Autoencoder
 
-This project is focusing on denosing financial time series data and finding out which denoising method has good performance. Implementing the result of the post is the goal of this project.
+This project is focusing on denosing financial time series data and finding out which denoising method has better performance. Finally finding new insights from noise distribution of the time series data.
 
 Mid-Result
-- [CNN Stacked AutoEncoder Result](./autoencoder-test.ipynb)
-- [CNN Stacked AutoEncode Traing Visualization](./results/CNN-kernel51.gif)
+- [Convolutional Autoencoder Result](./autoencoder-test.ipynb)
+- [Convolutional Autoencoder Traing Visualization](./results/CNN-kernel51.gif)
 - [Traditional Denoising Method Result](./trad-denoising.ipynb)
+- [Data Analysis: KL-divergence, KDE, Violin Plot, etc.](./noise-analysis.ipynb)
 
 The Project is ongoing.
 
 Traditional filters([tsfilt](./tsfilt/)) is from [this repository](https://github.com/statefb/ts-spatial-filter).
 
-- I am going to implement both CNN, LSTM stacked autoencoder to check whether the performance of CNN stacked autoencoder is better than LSTM stacked autoencoder.
-- The reason why I chosed bilateral filter instead of Gaussian filter is because complex financial data noise is not expected to form a Gaussian distribution.
+> Note.\
+> The reason why I chosed bilateral filter instead of Gaussian filter is because complex financial data noise is not expected to form a Gaussian distribution.
